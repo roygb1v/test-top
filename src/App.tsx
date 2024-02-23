@@ -6,7 +6,17 @@ import styled from 'styled-components';
 
 function App() {
 
-  return <Container>
+  return <div>
+  <Navigation>
+    <span style={{ width: 32, height: 32, background: "purple", borderRadius: 100}}/>
+    <div style={{ display: "flex", flexDirection: "column", gap: 6}}>
+      <div style={{height: 2, width: 24, background: "black"}}></div>
+      <div style={{height: 2, width: 24, background: "black"}}></div>
+      <div style={{height: 2, width: 24, background: "black"}}></div>
+    </div>
+  </Navigation>
+  
+  <Container>
     <ProfilePicture />
     <Title>Roy Cheong</Title>
     <SubTitle>Paragon Mall, Singapore</SubTitle>
@@ -79,6 +89,7 @@ function App() {
     </OpeningHours>
 
   </Container>
+  </div>
 }
 
 function PriceBlock({title, rows=[]}) {
@@ -109,7 +120,7 @@ const Container = styled.div`
 `
 
 const ProfilePicture = styled.div`
-  background: #dc2626;
+  background: #d4d4d4;
   width: 140px;
   height: 140px;
   border-radius: 50%;
@@ -162,11 +173,7 @@ const ReviewContainer = styled.div`
   padding: 24px;
   background: #d4d4d4;
   margin-top: 16px;
-  width: 320px;
-
-  @media (max-width: 768px) {
-    width: 100%;
-  }
+  width: 316px;
 `
 
 const ImagesContainer = styled.section`
@@ -195,7 +202,7 @@ const HorizontalDivider = styled.div`
 `
 
 const Prices = styled.div`
-  width: 340px;
+  width: 374px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -230,6 +237,14 @@ const OpeningHours = styled.div`
   gap: 16px;
   padding: 32px 0;
   margin-top: 64px;
+`
+
+const Navigation = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 4px;
+
 `
 
 export default App
