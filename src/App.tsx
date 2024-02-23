@@ -1,4 +1,5 @@
-import { useState } from 'react'
+// @ts-nocheck
+
 import './App.css'
 
 import styled from 'styled-components';
@@ -29,7 +30,7 @@ function App() {
     <Reviews>
       <Title>Reviews</Title>
       <ReviewsContainer>
-        <Review />
+        <Review title="I love the cuts and perm done by this guy! He is a very skilled person! Recommended!"/>
       </ReviewsContainer>
     </Reviews>
 
@@ -80,23 +81,6 @@ function App() {
   </Container>
 }
 
-const PricesContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-top: 16px;
-  min-width: 100%;
-`
-
-const Block = styled.div`
-  padding: 0 8px;
-`
-
-const PriceRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-`
-
 function PriceBlock({title, rows=[]}) {
   return <Block style={{padding: "0 8px"}}>
           <span style={{fontWeight: 700}}>{title}</span>
@@ -109,10 +93,10 @@ function PriceBlock({title, rows=[]}) {
         </Block>
 }
 
-function Review({ title, description, name, imgURL=null}) {
+function Review({ title="", description="", name="", imgURL=null}) {
 
   return <ReviewContainer>
-   I love the cuts and perm done by this guy! He is a very skilled person! Recommended!
+   {title}
   </ReviewContainer>
 }
 
@@ -219,6 +203,23 @@ const Prices = styled.div`
   @media (max-width: 768px) {
     width: 100%;
   }
+`
+
+const PricesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+  min-width: 100%;
+`
+
+const Block = styled.div`
+  padding: 0 8px;
+`
+
+const PriceRow = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
 
 const OpeningHours = styled.div`
