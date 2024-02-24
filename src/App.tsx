@@ -22,20 +22,7 @@ function App() {
     <Title>Roy Cheong</Title>
     <SubTitle>Paragon Mall, Singapore</SubTitle>
     <Description>Hairstylist at Salon</Description>
-    <div style={{
-      position: "fixed",
-      bottom: 0,
-      left: 0,
-      right: 0,
-      padding: "16px 4px 16px 8px",
-      background: "#f8fafc",
-      borderTop: "1px solid #d4d4d4",
-      borderBottom: "1px solid #d4d4d4",
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center"
-      
-    }}> 
+    <Reserve> 
         <div style={{
           display: "flex",
           flexDirection: "column",
@@ -48,7 +35,7 @@ function App() {
 
 
         <Button $primary>Reserve</Button>
-    </div>
+    </Reserve>
     <HorizontalDivider />
     <Gallery>
       <Title>Gallery</Title>
@@ -269,6 +256,11 @@ const OpeningHours = styled.div`
   gap: 16px;
   padding: 32px 0 108px 0;
   margin-top: 64px;
+
+  @media (min-width: 768px) {
+  // width: calc(100% - 2*844px);
+  max-width: 358px;
+}
 `
 
 const Navigation = styled.nav`
@@ -276,6 +268,30 @@ const Navigation = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 8px 4px;
+  @media (min-width: 768px) {
+    display: none;
+}
+`
+
+
+const Reserve = styled.div`
+position: fixed;
+bottom: 0;
+left: 0;
+right: 0;
+padding: 16px 4px 16px 8px;
+background: #f8fafc;
+border-top: 1px solid #d4d4d4;
+border-bottom: 1px solid #d4d4d4;
+display: flex;
+justify-content: space-between;
+align-items: center;
+
+@media (min-width: 768px) {
+  border: 1px solid #d4d4d4;
+  max-width: 344px;
+  margin: 0 auto;
+}
 
 `
 
