@@ -3,6 +3,7 @@
 import './App.css'
 
 import styled from 'styled-components';
+import dayjs from "dayjs";
 
 function App() {
 
@@ -21,7 +22,33 @@ function App() {
     <Title>Roy Cheong</Title>
     <SubTitle>Paragon Mall, Singapore</SubTitle>
     <Description>Hairstylist at Salon</Description>
-    <Button $primary>Book Now</Button>
+    <div style={{
+      position: "fixed",
+      bottom: 0,
+      left: 0,
+      right: 0,
+      padding: "16px 4px 16px 8px",
+      background: "#f8fafc",
+      borderTop: "1px solid #d4d4d4",
+      borderBottom: "1px solid #d4d4d4",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center"
+      
+    }}> 
+        <div style={{
+          display: "flex",
+          flexDirection: "column",
+        }}>
+          <div>
+            <span style={{fontWeight: 600}}>$50 SGD</span><span style={{ fontSize: 14, marginLeft: 4}}>Cut</span>
+          </div>
+          <span style={{fontSize: 14, fontWeight: 600}}>{dayjs().format('D MMM')}</span>
+        </div>
+
+
+        <Button $primary>Reserve</Button>
+    </div>
     <HorizontalDivider />
     <Gallery>
       <Title>Gallery</Title>
@@ -146,9 +173,10 @@ const Description = styled.p`
 `
 
 const Button = styled.button`
-  padding: 8px 48px;
+  padding: 12px 48px;
   background: ${props => props.$primary ? "#dc2626" : ""};
   color: #FFF;
+  font-size: 16px;
   font-weight: 600;
   border: none;
   border-radius: 4px;
@@ -197,8 +225,12 @@ const Image = styled.img`
 const HorizontalDivider = styled.div`
   width: 48px;
   height: 1px;
-  background: gray;
+  background: #cbd5e1;
   margin: 24px 0;
+
+  @media (max-width: 768px) {
+      width: 96%;
+  }
 `
 
 const Prices = styled.div`
@@ -235,7 +267,7 @@ const OpeningHours = styled.div`
   background:#171717;
   width: 100%;
   gap: 16px;
-  padding: 32px 0;
+  padding: 32px 0 108px 0;
   margin-top: 64px;
 `
 
