@@ -7,6 +7,8 @@ import dayjs from "dayjs";
 import Favourite from "./components/favourite";
 import About from "./components/about";
 import MainContainer from "./components/maincontainer";
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css';
 
 function App() {
   return <RootAppWrapper>
@@ -31,7 +33,7 @@ function App() {
       <Image></Image>
     </PictureContainer>
 
-    <div style={{position: "relative"}}>
+    <div style={{position: "relative", height: "min-content"}}>
     <MedContainer>
       <h2>Entire cabin in Walden, Colorado, United States</h2>
       <p>5 guests | 2 bedrooms | 3 beds | 1 bathroom</p>
@@ -79,16 +81,46 @@ function App() {
     
     <p style={{fontWeight: 500, fontSize: 22}}>What this place offers</p>
     <TwoColumnGridContainer>
-      <GridElement />
-      <GridElement />
-      <GridElement />
-      <GridElement />
-      <GridElement />
-      <GridElement />
-      <GridElement />
-      <GridElement />
-      <GridElement />
-      <GridElement />
+      <GridElement>
+        <div style={{width: 40, height: 40, borderRadius: 100, background: "green"}}/>
+        <p>Kitchen</p>
+      </GridElement>
+      <GridElement>
+        <div style={{width: 40, height: 40, borderRadius: 100, background: "green"}}/>
+        <p>Wifi</p>
+      </GridElement>
+      <GridElement>
+        <div style={{width: 40, height: 40, borderRadius: 100, background: "green"}}/>
+        <p>Dedicated workspace</p>
+      </GridElement>
+      <GridElement>
+        <div style={{width: 40, height: 40, borderRadius: 100, background: "green"}}/>
+        <p>Free parking on premises</p>
+      </GridElement>
+      <GridElement>
+        <div style={{width: 40, height: 40, borderRadius: 100, background: "green"}}/>
+        <p>Private hot tub</p>
+      </GridElement>
+      <GridElement>
+        <div style={{width: 40, height: 40, borderRadius: 100, background: "green"}}/>
+        <p>TV</p>
+      </GridElement>
+      <GridElement>
+        <div style={{width: 40, height: 40, borderRadius: 100, background: "green"}}/>
+        <p>Free washing machine</p>
+      </GridElement>
+      <GridElement>
+        <div style={{width: 40, height: 40, borderRadius: 100, background: "green"}}/>
+        <p>Free dryer</p>
+      </GridElement>
+      <GridElement>
+        <div style={{width: 40, height: 40, borderRadius: 100, background: "green"}}/>
+        <p>Carbon monoxide alarm</p>
+      </GridElement>
+      <GridElement>
+        <div style={{width: 40, height: 40, borderRadius: 100, background: "green"}}/>
+        <p>Smoke alarm</p>
+      </GridElement>
 
       <Button>
         Show all 58 amenities
@@ -96,12 +128,23 @@ function App() {
     </TwoColumnGridContainer>
     </MainContainer>
 
-    <MainContainer>
+    <MainContainer style={{background: "green"}}>
+      <Calendar 
+      calendarType="gregory"
+      minDate={new Date()}
+      />
     </MainContainer>
 
-    <Reserve />
+    <Reserve>
+
+      <Button $primary>Reserve</Button>
+
+    </Reserve>
   </div>
 
+  <ReviewsContainer>
+
+  </ReviewsContainer>
   </BodyWrapper>
   </RootAppWrapper>
 }
@@ -125,7 +168,6 @@ const RootAppWrapper = styled.div`
 const BodyWrapper = styled.div`
   min-width: 1120px;
   max-width: 1120px;
-  min-height: 100vh;
   border: 1px solid black;
   margin: 0 auto;
 
@@ -207,6 +249,10 @@ const Image = styled.div`
 `
 
 const Reserve = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
   height: 460px;
   width: 372px;
   border: 1px solid lightgray;
@@ -215,6 +261,11 @@ const Reserve = styled.div`
   bottom: 704px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   margin: 40px 0 0 auto;
+  padding-bottom: 32px;
+
+  button {
+    width: 100%;
+  }
 `
 
 const FlexContainer = styled.div`
@@ -242,28 +293,40 @@ const TwoColumnGridContainer = styled.section`
 `
 
 const GridElement = styled.div`
+  display: flex;
+  align-items: center;
   width: 266px;
   height: 40px;
-  background: lightgray;
 
-  &:last-child 
+  p {
+    margin-left: 16px;
+  }
+
 `
 
 const Button = styled.button`
-  background: white;
-  border: 1px solid black;
+  background: ${props => props.$primary ? "#F6475F" : "#FFFFFF"};
+  border: ${props => props.$primary ? "none" : "1px solid black"};
   padding: 13px 23px;
-  max-width: 208px;
+  max-width: ${props => props.$primary ? "322px" : "208px"};
   max-height: 48px;
-  color: #3D3D3D;
+  color: ${props => props.$primary ? "#FFFFFF" : "#3D3D3D"};
   border-radius: 8px;
   font-weight: 600;
   margin-top: 32px;
 
   &:hover {
-    background: lightgray;
+    background: ${props => props.$primary ? "" : "lightgray"};
     cursor: pointer;
   }
+`
+
+const ReviewsContainer = styled.div`
+  min-width: 100%;
+  min-height: 100vh;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid gray;
+  padding: 32px 0;
 `
 
 export default App
