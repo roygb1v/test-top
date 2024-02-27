@@ -5,7 +5,7 @@ import { RiStarSFill } from "react-icons/ri";
 
 const v = [0, 0, 0, 0, 0];
 
-export default function Favourite({ stars = 4.88, reviews = 92}) {
+export default function Favourite({ stars = "5.0", reviews = 92}) {
   return <Wrapper>
 
     <Tag $primary>Most <br /> popular</Tag>

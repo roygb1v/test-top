@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export default function About() {
+export default function About({ title, description}) {
   return (<Wrapper>
     <Container>
       <Picture />
       <SubContainer>
-        <Title>Serviced by Roy</Title>
-        <Description>Highly experienced. 20+ years of styling</Description>
+        <Title>{title}</Title>
+        <Description>{description}</Description>
       </SubContainer>
     </Container>
   </Wrapper>)
@@ -41,6 +41,5 @@ const Title = styled.p`
 
 const Description = styled.p`
   font-size: 14px;
-  font-weight: 300;
-  color: #3D3D3D;
+  color: gray;
 `

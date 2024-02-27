@@ -12,6 +12,10 @@
   /* letter-spacing: 0.02em; */
 }
 
+ul {
+  list-style: none;
+}
+
 .react-calendar {
   width: 100% !important;
   border: none !important;

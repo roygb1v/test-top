@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import dayjs from "dayjs";
 import Favourite from "./components/favourite";
 import About from "./components/about";
+import Review from "./components/review";
 import MainContainer from "./components/maincontainer";
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
@@ -19,10 +20,10 @@ function App() {
     <Container>
       <h1>Moose Haven Cabin @ 22 West</h1>
 
-      <ul>
-        <li>Share</li>
-        <li>Save</li>
-      </ul>
+      <LinkedList>
+        <li><Link href="/">Share</Link></li>
+        <li><Link href="/">Save</Link></li>
+      </LinkedList>
     </Container>
 
     <PictureContainer>
@@ -40,7 +41,10 @@ function App() {
     </MedContainer>
 
     <Favourite />
-    <About/>
+    <About
+      title="Serviced by Roy"
+      description="Highly experienced with over 20+ years in the industry"
+    />
 
     <MainContainer>
     <FlexContainer>
@@ -75,7 +79,6 @@ function App() {
       Child friendly and quiet area with no traffic. Fire pit, trip stair chair, toys and games. The cabin is perfect for one or more families, or one or more couples. No partying or groups of people.
       </p>
     </MainContainer>
-
 
     <MainContainer>
     
@@ -143,6 +146,38 @@ function App() {
   </div>
 
   <ReviewsContainer>
+  <TwoColumnGridContainer>
+    <Review 
+      timeAgo="2 days ago"
+      msg="I had an incredible stay at Reena's Coconest Langkawi! The location is absolutely breathtaking, peaceful, and the home itself extremely comfortable with so much to do. I'd love to..."
+    />
+    <Review 
+      timeAgo="2 days ago"
+      msg="Amazing and unique place to try! Away from the hustle of the city. Please bring your own food and groceries like one full bag so you wont feel hungry while staying there like what we did..."
+    />
+    <Review 
+      timeAgo="2 days ago"
+      msg="What a romantic place. Enjoyed the silence and the starry sky in the evening. And from the sunset and ascension.
+Breakfast wasn't that much. And we did the cooking ourselv..."
+    />
+    <Review 
+      timeAgo="2 days ago"
+      msg="Spectacular visit, worthy experience!"
+    />
+    <Review 
+      timeAgo="2 days ago"
+      msg="Very nice and original accommodation. The caretaker was very attentive with us, always available as well as our host.
+      well appointed space perfect for couples..."
+    />
+    <Review 
+      timeAgo="2 days ago"
+      msg="I had a great time!"
+    />
+
+    <Button>
+      Show all 86 reviews
+    </Button>
+  </TwoColumnGridContainer>
 
   </ReviewsContainer>
   </BodyWrapper>
@@ -179,15 +214,16 @@ const BodyWrapper = styled.div`
 const NavigationWrapper = styled.nav`
   min-width: 1440px;
   height: 80px;
-  background: pink;
-  border: 1px solid gray;
+  background: lightgray;
+  border: 1px solid black;
 
   ul {
     max-width: 70rem;
-    min-height: 80px;
+    max-height: 79px;
+    min-height: 78px;
     margin: 0 auto;
     list-style: none;
-    background: green;
+    background: #F7F7F7;
     border-left: 1px solid black;
     border-right: 1px solid black;
   }
@@ -229,10 +265,10 @@ const PictureContainer = styled.section`
 `
 
 const Image = styled.div`
-  background: salmon;
+  background: lightgray;
 
   &:first-child {
-    background: green;
+    background: #DDDDDD;
     grid-column: 1 / 5;
     grid-row: 1 / 3;
     border-top-left-radius: 12px;
@@ -323,10 +359,20 @@ const Button = styled.button`
 
 const ReviewsContainer = styled.div`
   min-width: 100%;
-  min-height: 100vh;
   border-top: 1px solid lightgray;
   border-bottom: 1px solid gray;
   padding: 32px 0;
+`
+
+const LinkedList = styled.ul`
+  display: flex;
+  gap: 16px;
+  list-style: none;
+`
+
+const Link = styled.a`
+  color: black;
+
 `
 
 export default App
