@@ -82,7 +82,7 @@ function App() {
 
     <MainContainer>
     
-    <p style={{fontWeight: 500, fontSize: 22}}>What this place offers</p>
+    <SubHeader>What this place offers</SubHeader>
     <TwoColumnGridContainer>
       <GridElement>
         <div style={{width: 40, height: 40, borderRadius: 100, background: "green"}}/>
@@ -180,7 +180,57 @@ Breakfast wasn't that much. And we did the cooking ourselv..."
   </TwoColumnGridContainer>
 
   </ReviewsContainer>
+
+  <StandardVerticalContainer>
+
+  <SubHeader>Things to Know</SubHeader>
+  <div style={{display: "flex", justifyContent: "space-between", padding: "16px 0"}}>
+  <SubContainer>
+    <p style={{fontSize: 18, color: "gray"}}>Rules</p>
+    <p>Check-in: 2:00 pm – 7:00 pm</p>
+    <p>Checkout before 11:00 am</p>
+    <p>1 guests maximum</p>
+    <Link href="/">Show more</Link>
+  </SubContainer>
+
+  <SubContainer>
+    <p style={{fontSize: 18, color: "gray"}}>Safety</p>
+    <p>Check-in: 2:00 pm – 7:00 pm</p>
+    <p>Checkout before 11:00 am</p>
+    <p>1 guests maximum</p>
+    <Link href="/">Show more</Link>
+  </SubContainer>
+
+
+  <SubContainer>
+    <p style={{fontSize: 18, color: "gray"}}>Cancellation policy</p>
+    <p>Free cancellation for 48 hours.</p>
+    <p style={{maxWidth: 400}}>Review the Host’s full cancellation policy which applies even if you cancel for illness or disruptions caused by COVID-19.</p>
+    <Link href="/">Show more</Link>
+  </SubContainer>
+  </div>
+  </StandardVerticalContainer>
   </BodyWrapper>
+  <Footer>
+    <TwoColumnGridContainer>
+      <div>
+        <p>Support</p>
+        <p>Accessibility</p>
+        <p>How to earn</p>
+        <p>Report listing</p>
+        <p>Contact</p>
+      </div>
+
+      <div>
+        <p>Frequently asked questions</p>
+        <p>Request features</p>
+        <p>Report bugs</p>
+        <p>Refer a friend</p>
+        <p>Speed up review</p>
+      </div>
+      
+    </TwoColumnGridContainer>
+  </Footer>
   </RootAppWrapper>
 }
 
@@ -337,7 +387,6 @@ const GridElement = styled.div`
   p {
     margin-left: 16px;
   }
-
 `
 
 const Button = styled.button`
@@ -364,6 +413,12 @@ const ReviewsContainer = styled.div`
   padding: 32px 0;
 `
 
+const SubHeader = styled.p`
+  width: fit-content;
+  font-weight: 500;
+  font-size: 22px;
+`
+
 const LinkedList = styled.ul`
   display: flex;
   gap: 16px;
@@ -372,7 +427,29 @@ const LinkedList = styled.ul`
 
 const Link = styled.a`
   color: black;
+`
 
+const StandardVerticalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 32px 0 32px 0;
+`
+
+const SubContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`
+
+const Footer = styled.div`
+  min-height: 424px;
+  min-width: 1120px;
+  max-width: 1120px;
+  margin: 0 auto;
+  background: #F7F7F7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 export default App

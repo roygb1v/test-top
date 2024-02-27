@@ -2,8 +2,8 @@
 
 import styled from 'styled-components';
 
-export default function MainContainer({ children }) {
-  return <Wrapper>
+export default function MainContainer({ children, styles }) {
+  return <Wrapper styles={styles}>
    {children}
   </Wrapper>
 }

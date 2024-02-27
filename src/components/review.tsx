@@ -7,6 +7,10 @@ import { RiStarSFill } from "react-icons/ri";
 
 const v = [0, 0, 0, 0, 0];
 
+const handleShowMore = (msg: string) => {
+  alert(msg)
+}
+
 export default function Review({ timeAgo = "1 week ago", msg = ""}) {
 
   return (<Wrapper>
@@ -20,7 +24,7 @@ export default function Review({ timeAgo = "1 week ago", msg = ""}) {
       </Container>
 
       <Comment>{msg}</Comment>
-      {msg.length >= 150 ? <Button>Show more</Button> : null }
+      {msg.length >= 150 ? <Button onClick={() => handleShowMore("Showing a lot more...")}>Show more</Button> : null }
   </Wrapper>
   )
 }
