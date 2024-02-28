@@ -17,7 +17,7 @@ ul {
 }
 
 .react-calendar {
-  width: 100% !important;
+  /* width: 100% !important; */
   border: none !important;
 }
 
@@ -58,4 +58,9 @@ button:disabled abbr {
 .react-calendar__navigation__label__labelText {
   font-size: 18px;
   font-weight: 700;
+}
+
+/* Clerk sidebar logo removal*/
+.cl-internal-b3fm6y {
+  display: none !important;
 }

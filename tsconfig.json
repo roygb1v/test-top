@@ -7,6 +7,10 @@
       "DOM",
       "DOM.Iterable"
     ],
+    "compilerOptions": {
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+    },
     "module": "ESNext",
     "skipLibCheck": true,
     "esModuleInterop": true,

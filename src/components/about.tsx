@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { RxAvatar } from "react-icons/rx";
 
 export default function About({ title, description}) {
   return (<Wrapper>
     <Container>
-      <Picture />
+      <RxAvatar  fontSize={40}/>
       <SubContainer>
         <Title>{title}</Title>
         <Description>{description}</Description>
@@ -41,5 +42,5 @@ const Title = styled.p`
 
 const Description = styled.p`
   font-size: 14px;
-  color: gray;
+  font-weight: 300;
 `
