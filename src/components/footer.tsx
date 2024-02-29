@@ -48,7 +48,7 @@ const Wrapper = styled.div`
   width: 100%;
   margin: 0 auto;
   background: #F7F7F7;
-  border-top: 1px solid gray;
+  border-top: 1px solid lightgray;
 `
 
 const Container = styled.div`

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, {useState, useEffect, useRef} from 'react';
 import './App.css'
 import { SignOutButton, SignInButton, SignedIn, SignedOut } from "@clerk/clerk-react"
@@ -7,9 +6,12 @@ import Favourite from "./components/favourite";
 import About from "./components/about";
 import Review from "./components/review";
 import MainCalendar from "./components/calendar";
+import BodyText from "./components/BodyText";
 import Reserve from "./components/reserve";
+import Popular from "./components/popular";
 import Footer from "./components/footer";
 import MainContainer from "./components/maincontainer";
+import LargeContainer from "./components/LargeContainer";
 import { BsPersonCircle } from "react-icons/bs";
 import { SlLocationPin } from "react-icons/sl";
 import { MdOutlineCleanHands } from "react-icons/md";
@@ -33,10 +35,39 @@ const AMENITIES = [
   {title: 'Smoke alarm', logo: <FaWifi />}
 ]
 
+const REVIEWS = [
+  {
+    timeAgo: "2 days ago",
+    msg: "I had an incredible stay at Reena's Coconest Langkawi! The location is absolutely breathtaking, peaceful, and the home itself extremely comfortable with so much to do. I'd love to..."
+  },
+    {
+    timeAgo: "2 days ago",
+    msg: "I had an incredible stay at Reena's Coconest Langkawi! The location is absolutely breathtaking, peaceful, and the home itself extremely comfortable with so much to do. I'd love to..."
+  },
+    {
+    timeAgo: "2 days ago",
+    msg: "I had an incredible stay at Reena's Coconest Langkawi! The location is absolutely breathtaking, peaceful, and the home itself extremely comfortable with so much to do. I'd love to..."
+  },
+    {
+    timeAgo: "2 days ago",
+    msg: "I had an incredible stay at Reena's Coconest Langkawi! The location is absolutely breathtaking, peaceful, and the home itself extremely comfortable with so much to do. I'd love to..."
+  },
+    {
+    timeAgo: "2 days ago",
+    msg: "I had an incredible stay at Reena's Coconest Langkawi! The location is absolutely breathtaking, peaceful, and the home itself extremely comfortable with so much to do. I'd love to..."
+  },
+    {
+    timeAgo: "2 days ago",
+    msg: "I had an incredible stay at Reena's Coconest Langkawi! The location is absolutely breathtaking, peaceful, and the home itself extremely comfortable with so much to do. I'd love to..."
+  }
+]
+const today = dayjs(new Date()).format(DATE_FORMAT)
+
 function App() {
-  const today = dayjs(new Date()).format(DATE_FORMAT)
   const [date, setDate] = useState(today);
-  const [openModal, setOpenModal] = useState<boolean>(false)
+  const [openModal, setOpenModal] = useState<boolean>(false);
+
+  const [showStickyNav, setShowStickyNav] = useState<boolean>(false);
   
   const handleReserve = () => {
     console.log('test')
@@ -46,12 +77,28 @@ function App() {
     const day = dayjs(date).format(DATE_FORMAT)
     setDate(day)
   }
+
+  useEffect(() => {
+    const handleScroll = (e) => {
+
+      if (window.scrollY > 594) {
+        console.log('show header')
+        setShowStickyNav(true)
+      } else {
+        setShowStickyNav(false)
+      }
+
+    }
+    document.addEventListener('scroll', handleScroll)
+
+    return () => document.removeEventListener('scroll', handleScroll)
+  }, [])
   
   return <RootAppWrapper>
-  <Navigation />
+  <Navigation 
+    sticky={showStickyNav}/>
 
   <BodyWrapper>
-
     <Container>
       <p style={{fontWeight: 500, fontSize: 26}}>Moose Haven Cabin @ 22 West</p>
 
@@ -62,20 +109,29 @@ function App() {
     </Container>
 
     <PictureContainer>
-      <Image></Image>
+      <Image>
+        <img style={{objectFit: "cover", borderTopLeftRadius: 12, borderBottomLeftRadius: 12, width: "100%", height: "100%"}}src="https://static.wixstatic.com/media/11062b_505242b110ea46ee960e3ecaaa6a878f~mv2.jpg/v1/fill/w_774,h_1040,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_505242b110ea46ee960e3ecaaa6a878f~mv2.jpg"/>
+      </Image>
       <Image></Image>
       <Image></Image>
       <Image></Image>
       <Image></Image>
     </PictureContainer>
 
-    <div style={{position: "relative", height: "min-content"}}>
+    <div style={{position: "relative", height: "100%", display: "flex", flexDirection: "row-reverse"}}>
+    <ReserveBox 
+      date={date}
+      handleChange={handleReserve}  
+    />
+
+    <div style={{maxWidth: 654}}>
     <MedContainer>
       <p style={{fontWeight: 500, fontSize:22}}>Entire cabin in Walden, Colorado, United States</p>
       <p style={{fontWeight: 400, fontSize: 16}}>5 guests | 2 bedrooms | 3 beds | 1 bathroom</p>
     </MedContainer>
 
     <Favourite />
+
     <About
       title="Serviced by Roy"
       description="Highly experienced with over 20+ years in the industry"
@@ -111,17 +167,10 @@ function App() {
       </div>
     </FlexContainer>
     </MainContainer>
-
-
-    <MainContainer>
-      <p style={{fontSize: 16, lineHeight: 1.5, fontWeight: 300}}>Modern cottage with nine beds and fantastic fjord views. Outside area with sun from morning to evening.
-      Kitchen with all amenities. Dining table and seating for 9 people. Large living room with sofa, table and TV.
-      Child friendly and quiet area with no traffic. Fire pit, trip stair chair, toys and games. The cabin is perfect for one or more families, or one or more couples. No partying or groups of people.
-      </p>
-    </MainContainer>
-
-    <MainContainer>
     
+    <MainContainer><BodyText /></MainContainer>
+
+    <LargeContainer>
     <SubHeader>What this place offers</SubHeader>
     <TwoColumnGridContainer>
       {
@@ -145,145 +194,37 @@ function App() {
     close
     </button>
     </Modal>}
+    </LargeContainer>
 
-    </MainContainer>
-
-    <MainCalendar
-      handleChange={handleDateChange}
-     />
-
-    <Reserve>
-    <>
-      <div style={{display: "flex", flexDirection: "column", padding: "0 24px" }}>
-      <p style={{fontWeight: 300, fontSize: 14}}><span style={{fontSize: 24, fontWeight: 500}}>$50 SGD</span> total</p>
-      <div style={{display: "flex", gap: 8, margin: "16px 0 8px 0"}}>
-      <div style={{ display: "flex", flexDirection: "column", border: "1px solid #3D3D3D", borderRadius: 8, width: "50%", padding: 8}}>
-        <span style={{fontSize: 12, fontWeight: 500}}>DATE</span>
-        <span style={{fontSize: 14, fontWeight: 300}}>{date?.toString()}</span>
-      </div>
-      <select style={{width: "50%", borderRadius: 8, fontSize: 14, fontWeight: 300, paddingLeft: 4}}>
-        <option>12 pm</option>
-        <option>1 pm</option>
-        <option>2 pm</option>
-        <option>3 pm</option>
-        <option>4 pm</option>
-        <option>5 pm</option>
-        <option>6 pm</option>
-      </select>
-      </div>
-      <select placeholder="Select a service" style={{width: "100%", borderRadius: 8, fontSize: 14, fontWeight: 300, minHeight: 48, paddingLeft: 4}}>
-        <option>Cut</option>
-        <option>Wash & Blow</option>
-        <option>Perm</option>
-        <option>Color</option>
-        <option>Treatment</option>
-        <option>Milbon Treatment</option>
-      </select>
-      <div style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center"
-      }}>
-      <Button $primary style={{margin: "16px auto"}}
-      onClick={() => handleReserve()}
-      >Reserve</Button>
-      <span style={{fontSize: 14, fontWeight: 300, color: "#3D3D3D"}}>You won't be charged yet</span>
-      </div>
-      </div>
-
-      <div style={{display: "flex", flexDirection: "column", gap: 16}}>
-      <div style={{padding: "0 24px", display: "flex", justifyContent: "space-between", fontWeight: 300}}>
-        <Link>$50 SGD x Cut</Link>
-        <p>$50 SGD</p>
-      </div>
-      <div style={{padding: "0 24px", display: "flex", justifyContent: "space-between", fontWeight: 300}}>
-        <Link>Platform fee</Link>
-        <p>$1 SGD</p>
-      </div>
-      </div>
-    </>
-      <HorizontalDivider />
-      <div style={{
-        display: "flex",
-        justifyContent: "space-between",
-        padding: "0 24px",
-      }}>
-        <p>Total before GST</p>
-        <p>$51 SGD</p>
-      </div>
-    </Reserve>
+    <MainCalendar handleChange={handleDateChange} />
+    </div>
   </div>
 
-  <ReviewsContainer>
-  <TwoColumnGridContainer>
-    <Review 
-      timeAgo="2 days ago"
-      msg="I had an incredible stay at Reena's Coconest Langkawi! The location is absolutely breathtaking, peaceful, and the home itself extremely comfortable with so much to do. I'd love to..."
-    />
-    <Review 
-      timeAgo="2 days ago"
-      msg="Amazing and unique place to try! Away from the hustle of the city. Please bring your own food and groceries like one full bag so you wont feel hungry while staying there like what we did..."
-    />
-    <Review 
-      timeAgo="2 days ago"
-      msg="What a romantic place. Enjoyed the silence and the starry sky in the evening. And from the sunset and ascension.
-Breakfast wasn't that much. And we did the cooking ourselv..."
-    />
-    <Review 
-      timeAgo="2 days ago"
-      msg="Spectacular visit, worthy experience!"
-    />
-    <Review 
-      timeAgo="2 days ago"
-      msg="Very nice and original accommodation. The caretaker was very attentive with us, always available as well as our host.
-      well appointed space perfect for couples..."
-    />
-    <Review 
-      timeAgo="2 days ago"
-      msg="I had a great time!"
-    />
+    <Popular />
 
-    <Button>
-      Show all 86 reviews
-    </Button>
-  </TwoColumnGridContainer>
-  </ReviewsContainer>
+    <Reviews reviews={REVIEWS} />
 
-  <StandardVerticalContainer>
-  <SubHeader>Things to Know</SubHeader>
-  <div style={{display: "flex", justifyContent: "space-between", padding: "16px 0"}}>
-  <SubContainer style={{fontWeight: 300}}>
-    <p style={{fontSize: 16, fontWeight: 400}}>Rules</p>
-    <p>Check-in: 2:00 pm – 7:00 pm</p>
-    <p>Checkout before 11:00 am</p>
-    <p>1 guests maximum</p>
-    <Link href="/">Show more</Link>
-  </SubContainer>
+    <HouseRules />
 
-  <SubContainer style={{fontWeight: 300}}>
-    <p style={{fontSize: 16, fontWeight: 400}}>Safety</p>
-    <p>Check-in: 2:00 pm – 7:00 pm</p>
-    <p>Checkout before 11:00 am</p>
-    <p>1 guests maximum</p>
-    <Link href="/">Show more</Link>
-  </SubContainer>
-
-
-  <SubContainer style={{fontWeight: 300}}>
-    <p style={{fontSize: 16, fontWeight: 400}}>Cancellation policy</p>
-    <p>Free cancellation for 48 hours.</p>
-    <p style={{maxWidth: 400}}>Review the Host’s full cancellation policy which applies even if you cancel for illness or disruptions caused by COVID-19.</p>
-    <Link href="/">Show more</Link>
-  </SubContainer>
-  </div>
-  </StandardVerticalContainer>
   </BodyWrapper>
-
   <Footer />
   </RootAppWrapper>
 }
 
-function Navigation() {
+function Reviews({ reviews }) {
+  return ( <ReviewsContainer><TwoColumnGridContainer>
+      {REVIEWS.map((review, index) => (<Review
+        key={index}
+        timeAgo={review.timeAgo}
+        msg={review.msg}
+      />))}
+      <Button>
+        Show all 86 reviews
+      </Button>
+    </TwoColumnGridContainer></ReviewsContainer>)
+}
+
+function Navigation({ sticky }) {
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   
   // [TODO] To understand this logic
@@ -306,11 +247,12 @@ function Navigation() {
     document.removeEventListener("click", handler);
   };
 }, []);
-  return <NavigationWrapper>
+
+  return <NavigationWrapper $sticky={sticky}>
     <NavList>
       <li style={{display: "flex", alignItems: "flex-start", justifyContent: "center"}}>
-        <span><FiHome fontSize={22}/></span>
-        <span style={{fontWeight: 600, fontSize: 18, color: "#000"}}>superwork</span>
+        {/* <span><FiHome fontSize={22}/></span> */}
+        <span style={{fontWeight: 700, fontSize: 22, color: "#000"}}>superwork</span>
       </li>
       <li style={{position: "absolute", right: 0, top: 16}}>
         <ProfileButton style={{position: "absolute", right: 0, display: "flex", alignItems: "center", justifyContent: "space-evenly"}} onClick={() => setShowDropdown((prev) => {
@@ -346,6 +288,98 @@ function Navigation() {
   </NavigationWrapper>
 }
 
+function HouseRules() {
+  return (<StandardVerticalContainer>
+  <SubHeader>Things to Know</SubHeader>
+  <div style={{display: "flex", justifyContent: "space-between", padding: "16px 0"}}>
+  <SubContainer style={{fontWeight: 300}}>
+    <p style={{fontSize: 16, fontWeight: 400}}>Rules</p>
+    <p>Check-in: 2:00 pm – 7:00 pm</p>
+    <p>Checkout before 11:00 am</p>
+    <p>1 guests maximum</p>
+    <Link href="/">Show more</Link>
+  </SubContainer>
+
+  <SubContainer style={{fontWeight: 300}}>
+    <p style={{fontSize: 16, fontWeight: 400}}>Safety</p>
+    <p>Check-in: 2:00 pm – 7:00 pm</p>
+    <p>Checkout before 11:00 am</p>
+    <p>1 guests maximum</p>
+    <Link href="/">Show more</Link>
+  </SubContainer>
+  <SubContainer style={{fontWeight: 300}}>
+    <p style={{fontSize: 16, fontWeight: 400}}>Cancellation policy</p>
+    <p>Free cancellation for 48 hours.</p>
+    <p style={{maxWidth: 400}}>Review the Host’s full cancellation policy which applies even if you cancel for illness or disruptions caused by COVID-19.</p>
+    <Link href="/">Show more</Link>
+  </SubContainer>
+  </div>
+  </StandardVerticalContainer>)
+}
+
+function ReserveBox({ date, handleChange}) {
+  return (<Reserve>
+    <>
+      <div style={{display: "flex", flexDirection: "column", padding: "0 24px" }}>
+      <p style={{fontWeight: 300, fontSize: 14}}><span style={{fontSize: 24, fontWeight: 500}}>$50 SGD</span> total</p>
+      <div style={{display: "flex", gap: 8, margin: "16px 0 8px 0"}}>
+      <div style={{ display: "flex", flexDirection: "column", border: "1px solid #3D3D3D", borderRadius: 8, width: "50%", padding: 8}}>
+        <span style={{fontSize: 12, fontWeight: 500}}>DATE</span>
+        <span style={{fontSize: 14, fontWeight: 300}}>{date?.toString()}</span>
+      </div>
+      <select style={{width: "50%", borderRadius: 8, fontSize: 14, fontWeight: 300, paddingLeft: 4}}>
+        <option>12 pm</option>
+        <option>1 pm</option>
+        <option>2 pm</option>
+        <option>3 pm</option>
+        <option>4 pm</option>
+        <option>5 pm</option>
+        <option>6 pm</option>
+      </select>
+      </div>
+      <select placeholder="Select a service" style={{width: "100%", borderRadius: 8, fontSize: 14, fontWeight: 300, minHeight: 48, paddingLeft: 4}}>
+        <option>Cut</option>
+        <option>Wash & Blow</option>
+        <option>Perm</option>
+        <option>Color</option>
+        <option>Treatment</option>
+        <option>Milbon Treatment</option>
+      </select>
+      <div style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+      }}>
+      <Button $primary style={{margin: "16px auto"}}
+      onClick={() => handleChange()}
+      >Reserve</Button>
+      <span style={{fontSize: 14, fontWeight: 300, color: "#3D3D3D"}}>You won't be charged yet</span>
+      </div>
+      </div>
+
+      <div style={{display: "flex", flexDirection: "column", gap: 16}}>
+      <div style={{padding: "0 24px", display: "flex", justifyContent: "space-between", fontWeight: 300}}>
+        <Link>$50 SGD x Cut</Link>
+        <p>$50 SGD</p>
+      </div>
+      <div style={{padding: "0 24px", display: "flex", justifyContent: "space-between", fontWeight: 300}}>
+        <Link>Platform fee</Link>
+        <p>$1 SGD</p>
+      </div>
+      </div>
+    </>
+      <HorizontalDivider />
+      <div style={{
+        display: "flex",
+        justifyContent: "space-between",
+        padding: "0 24px",
+      }}>
+        <p>Total before GST</p>
+        <p>$51 SGD</p>
+      </div>
+    </Reserve>)
+}
+
 const Modal = styled.div`
   position: absolute;
   max-width: 1120px;
@@ -353,7 +387,6 @@ const Modal = styled.div`
   max-height: 800px;
   min-height: 800px;
   background: salmon;
-  // top: 20%;
   left: 0;
   right: 0;
   padding: 16px;
@@ -372,16 +405,20 @@ const BodyWrapper = styled.div`
   margin: 0 auto;
 
   @media(max-width: 768px) {
-    max-width: 375px;
-    background: red;
+    background: pink;
+    margin-left: 158px;
   }
 `
 const NavigationWrapper = styled.nav`
-  position: relative;
   min-width: 1440px;
   height: 80px;
-  background: lightgray;
-  // border: 1px solid black;
+  background: #F7F7F7;
+  border-bottom: 1px solid lightgray;
+  z-index: ${props => props.$sticky ? 2 : 1};
+  position: ${props => props.$sticky ? "sticky" : ""};
+  top: 0;
+  left: 0;
+  right: 0;
 
   ul {
     max-width: 70rem;

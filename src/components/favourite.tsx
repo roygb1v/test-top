@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import styled from 'styled-components';
 import { RiStarSFill } from "react-icons/ri";
 
@@ -13,7 +11,7 @@ export default function Favourite({ stars = "5.0", reviews = 92}) {
     <Container>
       <SubContainer>
         <Tag>{stars}</Tag>
-        <StarsContainer>{v.map(elem => (<RiStarSFill />))}</StarsContainer>
+        <StarsContainer>{v.map(elem => (<RiStarSFill key={elem}/>))}</StarsContainer>
       </SubContainer>
       <VerticalDivider />
       <SubContainer>

@@ -9,14 +9,12 @@ export default function MainCalendar({ handleChange }) {
       minDate={new Date()}
       onChange={(date) => handleChange(date)}
       />
-      <div style={{ display: "flex", flexDirection: "column", gap: 16, maxHeight: 282, overflowY: "auto"}}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 16, maxHeight: 282}}>
         <Button>12 pm</Button>
         <Button>1 pm</Button>
         <Button>2 pm</Button>
         <Button>3 pm</Button>
-        <Button>4 pm</Button>
-        <Button>5 pm</Button>
-        <Button>6 pm</Button>
+
       </div>
   </Wrapper>
   )
@@ -28,7 +26,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   gap: 32px;
   border-top: 1px solid lightgray;
-  padding: 32px 0;
+  padding: 48px 0;
   max-width: 654px;
 `
 

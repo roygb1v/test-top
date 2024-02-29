@@ -18,13 +18,6 @@ const Wrapper = styled.div`
   max-width: 654px;
 `
 
-const Picture = styled.img`
-  width: 40px;
-  height: 40px;
-  border-radius: 100px;
-  background: green;
-`
-
 const Container = styled.div`
   display: flex;
 `

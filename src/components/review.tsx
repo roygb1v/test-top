@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import About from "./about"
 
 import styled from 'styled-components';
@@ -19,7 +17,7 @@ export default function Review({ timeAgo = "1 week ago", msg = ""}) {
       description="Singapore"
       />
       <Container>
-      <StarsContainer>{v.map(elem => (<RiStarSFill />))}</StarsContainer>
+      <StarsContainer>{v.map(elem => (<RiStarSFill key={elem}/>))}</StarsContainer>
       <p>{timeAgo}</p>
       </Container>
 
